@@ -11,4 +11,27 @@ public class Student {
         this.name = name;
         this.school = school;
     }
+
+    //select id,name,school from ? where id = ? and name = ? and school = ?
+    public String getSearchSql(){
+           String sql = "select ";
+           if(!this.id.equals(""))
+               sql += "id,";
+           if(!this.name.equals(""))
+               sql += "name,";
+           if(!this.school.equals(""))
+               sql += "school,";
+           if(sql.equals("select "))
+               return "select * from ?";
+           sql = sql.substring(0, sql.length() -1);
+           sql += " for ? where";
+           if(!this.id.equals(""))
+               sql += " id = ? and";
+            if(!this.name.equals(""))
+                sql += "name = ? and";
+            if(!this.school.equals(""))
+                sql += "shcool = ? and";
+            sql = sql.substring(0, sql.length() -4);
+        return sql;
+    }
 }
