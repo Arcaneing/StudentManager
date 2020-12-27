@@ -5,6 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Main");
+        frame.setContentPane(new Main().jpanle1);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }
+
     private JTable table1;
     private JButton OKButton;
     private JButton searchButton;
@@ -14,6 +22,7 @@ public class Main {
     private JTextField textField1;
     private JTextField textField2;
     private JTextField textField3;
+    private JPanel jpanle1;
 
     public Main() {
         searchButton.addActionListener(new ActionListener() {
