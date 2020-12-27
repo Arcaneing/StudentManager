@@ -87,9 +87,9 @@ public class JDBCUtils {
         try {
             QueryRunner runner = new QueryRunner();
             conn = JDBCUtils.getConnection();
-            String sql = "select id,name,school from ? where id = ? and name = ? and school = ?";
+            String sql = s.getSearchSql();
             BeanListHandler<Object>handler = new BeanListHandler<>(Object.class);
-            list = runner.query(conn,sql,handler);
+            list = runner.query(conn,sql,handler,table);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {

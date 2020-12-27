@@ -26,12 +26,13 @@ public class Student {
            sql = sql.substring(0, sql.length() -1);
            sql += " for ? where";
            if(!this.id.equals(""))
-               sql += " id = ? and";
+               sql += " id = "+this.id+" and";
             if(!this.name.equals(""))
-                sql += "name = ? and";
+                sql += "name = "+this.name+" and";
             if(!this.school.equals(""))
-                sql += "shcool = ? and";
+                sql += "shcool = "+this.school+" and";
             sql = sql.substring(0, sql.length() -4);
         return sql;
     }
+
 }
