@@ -8,11 +8,13 @@ import java.net.Socket;
 
 public class socketTest {
     public static void Server(){
+        System.out.println("START");
         Socket s = null;
         try {
-            ServerSocket ss = new ServerSocket(10086);
+            ServerSocket ss = new ServerSocket(8888);
             s = ss.accept();
             InputStream is = s.getInputStream();
+            System.out.println("GET");
             byte[] by = new byte[1024];
             int num = 0;
             while((num = is.read())!=-1){
@@ -35,11 +37,12 @@ public class socketTest {
     public static void Clinet(){
         Socket s = null;
         try {
-            s = new Socket("127.0.0.1", 10086);
+            s = new Socket("127.0.0.1", 8888);
             OutputStream os = s.getOutputStream();
             os.write(97);
             os.write(98);
             os.write(99);
+            System.out.println("OUT");
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -51,23 +54,5 @@ public class socketTest {
                 e.printStackTrace();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        Runnable runnable1 = new Runnable() {
-            @Override
-            public void run() {
-                Server();
-            }
-        };
-        Runnable runnable2 = new Runnable() {
-            @Override
-            public void run() {
-                Clinet();
-            }
-        };
-
-        runnable1.run();
-        runnable2.run();
     }
 }
