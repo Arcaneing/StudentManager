@@ -4,9 +4,7 @@ import com.alibaba.druid.pool.DruidDataSourceFactory;
 import edu.zhaosx.studentmanager.Student;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-
 import javax.sql.DataSource;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -14,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
-import java.util.Queue;
 
 public class JDBCUtils {
 
@@ -98,5 +95,20 @@ public class JDBCUtils {
         return list;
     }
 
+    public static int editDate(String table,Student org,Student target){
+        Connection conn = null;
+        int editCount = 0;
+        try {
+            QueryRunner queryRunner = new QueryRunner();
+            conn = JDBCUtils.getConnection();
+            String sql = "update ? set id=? name=? school=?";
+            editCount = queryRunner.update(conn,sql,table,org.id,target.id,target.name,target.school);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }finally {
+            JDBCUtils.closeConnection(conn);
+        }
+        return editCount;
+    }
 
 }
