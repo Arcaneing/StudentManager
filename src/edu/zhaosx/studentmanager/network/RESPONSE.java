@@ -1,15 +1,15 @@
 package edu.zhaosx.studentmanager.network;
-
-
 import com.alibaba.fastjson.JSONObject;
 
+import java.net.Socket;
 import java.util.List;
 
-public class RESPONSE{
+public class RESPONSE implements Runnable{
     public int allow;
     public List<Object> objects;
     public int okCount;
     public String key;
+    public Socket s;
 
     public RESPONSE(int allow,List<Object>objects,int okCount,String key){
         this.allow = allow;
@@ -37,5 +37,10 @@ public class RESPONSE{
         object.put("IokCount",this.objects);
         object.put("Skey",this.key);
         return object;
+    }
+
+    @Override
+    public void run() {
+
     }
 }

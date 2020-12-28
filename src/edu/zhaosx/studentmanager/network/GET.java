@@ -2,11 +2,15 @@ package edu.zhaosx.studentmanager.network;
 
 import com.alibaba.fastjson.JSONObject;
 
-public class GET {
+import java.net.Socket;
+
+public class GET implements Runnable{
     public int request;
     public String tables;
     public Object objects;
     public String key;
+    public Socket s;
+
     public GET(int request,String tables,Object objects,String key){
         this.request = request;
         this.objects = objects;
@@ -33,5 +37,10 @@ public class GET {
         this.objects = object.getObject("Oobject",Object.class);
         this.key = object.getString("Skey");
         return this;
+    }
+
+    @Override
+    public void run() {
+
     }
 }
