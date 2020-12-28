@@ -1,15 +1,15 @@
 package edu.zhaosx.studentmanager.network;
 import com.alibaba.fastjson.JSONObject;
+import edu.zhaosx.studentmanager.Transaction;
 
 import java.net.Socket;
 import java.util.List;
 
-public class RESPONSE implements Runnable{
+public class RESPONSE extends Transaction implements Runnable{
     public int allow;
     public List<Object> objects;
     public int okCount;
     public String key;
-    public Socket s;
 
     public RESPONSE(int allow,List<Object>objects,int okCount,String key){
         this.allow = allow;
@@ -19,6 +19,7 @@ public class RESPONSE implements Runnable{
     }
 
     public RESPONSE(JSONObject object){
+        super.object = object;
         solve(object);
     }
 
@@ -31,7 +32,6 @@ public class RESPONSE implements Runnable{
     }
 
     public JSONObject coding(RESPONSE r){
-        JSONObject object = new JSONObject();
         object.put("Iallow",this.allow);
         object.put("Lobjects",this.objects);
         object.put("IokCount",this.objects);

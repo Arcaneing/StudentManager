@@ -1,17 +1,18 @@
 package edu.zhaosx.studentmanager.network;
 
 import com.alibaba.fastjson.JSONObject;
+import edu.zhaosx.studentmanager.Transaction;
 
 import java.net.Socket;
 
-public class GET implements Runnable{
+public class GET extends Transaction implements Runnable{
     public int request;
     public String tables;
     public Object objects;
     public String key;
-    public Socket s;
 
     public GET(int request,String tables,Object objects,String key){
+        super();
         this.request = request;
         this.objects = objects;
         this.tables = tables;
@@ -19,11 +20,12 @@ public class GET implements Runnable{
     }
 
     public GET(JSONObject object){
+        super.object = object;
         getSolve(object);
+
     }
 
     public JSONObject getCodeing(){
-        JSONObject object = new JSONObject();
         object.put("Irequest",request);
         object.put("Stables",tables);
         object.put("Oobject",objects);
@@ -31,12 +33,11 @@ public class GET implements Runnable{
         return object;
     }
 
-    public GET getSolve(JSONObject object){
+    public void getSolve(JSONObject object){
         this.request = object.getIntValue("Irequest");
         this.tables = object.getString("Stables");
         this.objects = object.getObject("Oobject",Object.class);
         this.key = object.getString("Skey");
-        return this;
     }
 
     @Override
