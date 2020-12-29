@@ -74,6 +74,7 @@ public class JDBCUtils {
         } finally {
             JDBCUtils.closeConnection(conn);
         }
+        System.out.println("DELETE");
         return insertCount;
     }
 
@@ -91,6 +92,25 @@ public class JDBCUtils {
         } finally {
             JDBCUtils.closeConnection(conn);
         }
+        System.out.println("SEARCH");
+        return list;
+    }
+
+    public static List<Object> getDate(String table){
+        Connection conn = null;
+        List<Object> list = null;
+        try {
+            QueryRunner runner = new QueryRunner();
+            conn = JDBCUtils.getConnection();
+            String sql = "select * from " + table;
+            BeanListHandler<Object>handler = new BeanListHandler<>(Object.class);
+            list = runner.query(conn,sql,handler,table);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            JDBCUtils.closeConnection(conn);
+        }
+        System.out.println("SHOW");
         return list;
     }
 
@@ -107,6 +127,7 @@ public class JDBCUtils {
         }finally {
             JDBCUtils.closeConnection(conn);
         }
+        System.out.println("EDIT");
     }
 
     public static boolean login(String user,String ps){

@@ -11,7 +11,7 @@ public class THREADUtils {
     private static ThreadPoolExecutor executor = null;
     static{
         //先填一下参数，回去再读配置
-        executor = new ThreadPoolExecutor(5, 10, 200, TimeUnit.MILLISECONDS,
+        executor = new ThreadPoolExecutor(5, 100, 200, TimeUnit.MILLISECONDS,
                 new ArrayBlockingQueue<Runnable>(5));
     }
 
