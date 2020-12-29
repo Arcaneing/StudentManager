@@ -62,7 +62,8 @@ public class JDBCUtils {
         return insertCount;
     }
 
-    public static int deleteDate(String table,String id){
+    public static int deleteDate(String table,Student stu){
+        String id = stu.id;
         Connection conn = null;
         int insertCount = 0;
         try {

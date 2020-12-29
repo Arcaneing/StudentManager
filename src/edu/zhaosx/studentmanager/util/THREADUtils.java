@@ -1,5 +1,7 @@
 package edu.zhaosx.studentmanager.util;
 
+import edu.zhaosx.studentmanager.network.addServersTread;
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -14,8 +16,8 @@ public class THREADUtils {
     }
 
 
-    public static void putThread(Object o){
-
+    public static void putThread(addServersTread o){
+        executor.execute(o);
     }
 
 }
