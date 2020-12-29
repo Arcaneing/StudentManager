@@ -25,6 +25,7 @@ public class Main {
     private JTextField textField2;
     private JTextField textField3;
     private JPanel jpanle1;
+    private JButton editButton;
 
     public Main() {
         searchButton.addActionListener(new ActionListener() {
