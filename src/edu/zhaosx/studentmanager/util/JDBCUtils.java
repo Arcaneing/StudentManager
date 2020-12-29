@@ -7,9 +7,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import javax.sql.DataSource;
 import java.io.InputStream;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 import java.util.Properties;
 
@@ -96,7 +94,7 @@ public class JDBCUtils {
         return list;
     }
 
-    public static int editDate(String table,Student org,Student target){
+    public static void editDate(String table, Student org, Student target){
         Connection conn = null;
         int editCount = 0;
         try {
@@ -109,7 +107,23 @@ public class JDBCUtils {
         }finally {
             JDBCUtils.closeConnection(conn);
         }
-        return editCount;
+    }
+
+    public static boolean login(String user,String ps){
+        Connection conn = null;
+
+        try {
+            conn = JDBCUtils.getConnection();
+            String sql = "select * from  table_0 where id=? and password=?;";
+            PreparedStatement sta = conn.prepareStatement(sql);
+            sta.setString(1, user);
+            sta.setString(2, ps);
+            ResultSet rs =  sta.executeQuery();
+            return rs.next();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
 }

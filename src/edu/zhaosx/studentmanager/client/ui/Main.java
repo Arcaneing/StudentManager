@@ -1,11 +1,13 @@
 package edu.zhaosx.studentmanager.client.ui;
 
+import edu.zhaosx.studentmanager.Student;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Main {
-    public static void main(String[] args) {
+    public  void show(){
         JFrame frame = new JFrame("Main");
         frame.setContentPane(new Main().jpanle1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,5 +57,10 @@ public class Main {
 
             }
         });
+    }
+
+    private Student mkStu(){
+        Student student = new Student(textField1.getText(),textField2.getText(),textField3.getText());
+        return student;
     }
 }

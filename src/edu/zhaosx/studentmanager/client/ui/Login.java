@@ -1,5 +1,7 @@
 package edu.zhaosx.studentmanager.client.ui;
 
+import edu.zhaosx.studentmanager.util.JDBCUtils;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,12 +12,12 @@ public class Login {
     private JPanel panel1;
     private JTextField textField2;
     private JButton loginButton;
-
+    private static JFrame frame;
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Login");
+        frame = new JFrame("Login");
         frame.setTitle("学生管理系统");
         Toolkit tk = Toolkit.getDefaultToolkit();
-        Dimension dimension = tk.getScreenSize();//获取屏幕大小
+        Dimension dimension = tk.getScreenSize();
         int width=dimension.width;
         int height=dimension.height;
         int x=(width-422)/2;
@@ -33,7 +35,15 @@ public class Login {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String user = textField1.getText();
+                String ps = textField2.getText();
+                if(JDBCUtils.login(user,ps)){
+                Main m = new Main();
+                m.show();
+                frame.dispose();
+                }else{
+                    JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
