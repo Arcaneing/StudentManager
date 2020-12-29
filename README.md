@@ -22,9 +22,7 @@ C <----> Server <----> SQL
 
 ### Servers
 
-这部分没想好，，正在想，，并发编程应该是个大问题。
-
-实在不好手写就直接上Spring。
+监听到客户端请求后,new一个线程,扔进线程池,解析json,执行jdbc任务,将结果打包成json,传回客户端
 
 
 
@@ -32,8 +30,8 @@ C <----> Server <----> SQL
 
 GUI部分使用java的swing来实现。
 
-数据传递用json。
+点击button后生成一个student类,将请求封装成GET类丢给addClientTread处理:new一个线程,扔进线程池,把请求打包成json,扔给服务器.接收服务器相应数据,解析,绘制.
 
-返回的结果解析后在swing上绘制。
+### JDBC
 
-或者明天自学一下js找室友写个html，直接在swing上贴WebView
+用了一个连接池,加载JDBCUtil工具类的时候,先把连接池创建了,之后每次操作sql,都从连接池拿connected.
